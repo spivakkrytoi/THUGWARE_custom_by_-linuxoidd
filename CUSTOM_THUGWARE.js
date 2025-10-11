@@ -72,15 +72,15 @@
 .section-header {
     font-size: 14px;
     font-weight: 800;
-    color: var(--primary-color);
+    color: var(--text-primary);
     text-transform: uppercase;
     letter-spacing: 1px;
     margin: 15px 15px 8px 15px;
     padding: 8px 12px;
-    background: linear-gradient(90deg, transparent, rgba(0, 255, 64, 0.1), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
     border-radius: 8px;
     text-align: center;
-    border: 1px solid rgba(0, 255, 64, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     position: relative;
     overflow: hidden;
 }
@@ -92,7 +92,7 @@
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(0, 255, 64, 0.2), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
     transition: left 0.5s ease;
 }
 
@@ -113,25 +113,27 @@
     padding: 15px;
 }
 
-.language-selector, .theme-selector {
+.language-selector, .theme-selector, .size-selector, .background-selector {
     margin-bottom: 20px;
 }
 
 .selector-title {
     font-size: 14px;
     font-weight: 700;
-    color: var(--primary-color);
+    color: var(--text-primary);
     margin-bottom: 10px;
 }
 
-.language-buttons, .theme-buttons {
+.language-buttons, .theme-buttons, .size-buttons {
     display: flex;
     gap: 10px;
     margin-bottom: 15px;
+    flex-wrap: wrap;
 }
 
-.lang-btn, .theme-btn {
+.lang-btn, .theme-btn, .size-btn {
     flex: 1;
+    min-width: 80px;
     padding: 10px;
     border: 1px solid rgba(255, 255, 255, 0.2);
     background: var(--background-secondary);
@@ -142,47 +144,86 @@
     font-size: 12px;
 }
 
-.lang-btn:hover, .theme-btn:hover {
+.lang-btn:hover, .theme-btn:hover, .size-btn:hover {
     background: rgba(255, 255, 255, 0.1);
     transform: translateY(-2px);
 }
 
-.lang-btn.active, .theme-btn.active {
+.lang-btn.active, .theme-btn.active, .size-btn.active {
     background: var(--primary-color);
     color: #000;
     font-weight: 700;
 }
 
-/* Coming Soon стилі */
-.coming-soon {
-    text-align: center;
-    padding: 40px 20px;
-    color: var(--text-secondary);
+.background-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
-.coming-soon-text {
-    font-size: 18px;
-    font-weight: 700;
-    margin-bottom: 10px;
-    color: var(--primary-color);
+.background-slider {
+    width: 100%;
+    margin: 10px 0;
 }
 
-.coming-soon-subtext {
+.slider-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.slider-label {
     font-size: 12px;
-    opacity: 0.7;
+    color: var(--text-primary);
+    min-width: 80px;
+}
+
+.slider-value {
+    font-size: 12px;
+    color: var(--primary-color);
+    font-weight: 700;
+    min-width: 30px;
+}
+
+.background-slider {
+    flex: 1;
+    height: 5px;
+    border-radius: 3px;
+    background: var(--background-secondary);
+    outline: none;
+    -webkit-appearance: none;
+}
+
+.background-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    cursor: pointer;
+    border: 2px solid var(--background-primary);
+}
+
+.background-slider::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    cursor: pointer;
+    border: 2px solid var(--background-primary);
 }
 
 /* Інфо стилі */
 .info-content {
     padding: 20px;
-    color: var(--text-secondary);
+    color: var(--text-primary);
     line-height: 1.6;
 }
 
 .info-title {
     font-size: 16px;
     font-weight: 700;
-    color: var(--primary-color);
+    color: var(--text-primary);
     margin-bottom: 15px;
     text-align: center;
 }
@@ -198,6 +239,7 @@
     border-radius: 8px;
     margin: 8px 0;
     border-left: 3px solid var(--primary-color);
+    color: var(--text-primary);
 }
 
 :root {
@@ -212,6 +254,7 @@
   --text-secondary: #cccccc;
   --border-radius: 15px;
   --transition-speed: 0.3s;
+  --background-opacity: 1;
 }
 
 /* Темы */
@@ -243,6 +286,66 @@
   --background-primary: #001f3f;
   --background-secondary: #003366;
   --background-tertiary: #004080;
+}
+
+.theme-gold {
+  --primary-color: #ffd700;
+  --secondary-color: #ffaa00;
+  --danger-color: #ff6b00;
+  --warning-color: #ff9500;
+  --background-primary: #1a1200;
+  --background-secondary: #2a1a00;
+  --background-tertiary: #3a2a00;
+}
+
+.theme-matrix {
+  --primary-color: #00ff00;
+  --secondary-color: #00cc00;
+  --danger-color: #ff0000;
+  --warning-color: #ffff00;
+  --background-primary: #000f00;
+  --background-secondary: #001a00;
+  --background-tertiary: #002a00;
+}
+
+.theme-forest {
+  --primary-color: #00ff88;
+  --secondary-color: #00aa55;
+  --danger-color: #ff4444;
+  --warning-color: #ffaa00;
+  --background-primary: #001a0a;
+  --background-secondary: #002a1a;
+  --background-tertiary: #003a2a;
+}
+
+.theme-lava {
+  --primary-color: #ff3300;
+  --secondary-color: #ff6600;
+  --danger-color: #ff0000;
+  --warning-color: #ffff00;
+  --background-primary: #1a0000;
+  --background-secondary: #2a0a00;
+  --background-tertiary: #3a1a00;
+}
+
+.theme-royal {
+  --primary-color: #9b30ff;
+  --secondary-color: #6a0dad;
+  --danger-color: #ff00ff;
+  --warning-color: #ffaa00;
+  --background-primary: #0a001a;
+  --background-secondary: #1a002a;
+  --background-tertiary: #2a003a;
+}
+
+.theme-ice {
+  --primary-color: #00ffff;
+  --secondary-color: #00aaff;
+  --danger-color: #ff00aa;
+  --warning-color: #ffffff;
+  --background-primary: #001a1a;
+  --background-secondary: #002a2a;
+  --background-tertiary: #003a3a;
 }
 
 /* Анимации */
@@ -306,8 +409,8 @@
     backdrop-filter: blur(15px) saturate(200%);
     color: var(--text-primary);
     box-shadow: 
-        0 0 50px rgba(0, 255, 64, 0.4),
-        0 0 100px rgba(0, 255, 64, 0.2),
+        0 0 30px var(--primary-color, 0.3),
+        0 0 60px var(--primary-color, 0.2),
         inset 0 1px 0 rgba(255, 255, 255, 0.1),
         inset 0 -1px 0 rgba(0, 0, 0, 0.5);
     border-radius: var(--border-radius);
@@ -318,12 +421,34 @@
     font-family: 'Segoe UI', system-ui, sans-serif;
     animation: slideIn 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     transition: all var(--transition-speed) ease;
+    resize: both;
+    min-width: 350px;
+    min-height: 500px;
+    max-width: 90vw;
+    max-height: 90vh;
+}
+
+/* Фоновый текст */
+.Thugware-panel::before {
+    content: 'ZOOMK1LL3R';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 40px;
+    font-weight: 900;
+    color: rgba(255, 255, 255, 0.02);
+    z-index: -1;
+    text-shadow: 0 0 30px var(--primary-color, 0.1);
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: var(--background-opacity);
 }
 
 .Thugware-panel:hover {
     box-shadow: 
-        0 0 60px rgba(0, 255, 64, 0.6),
-        0 0 120px rgba(0, 255, 64, 0.3),
+        0 0 40px var(--primary-color, 0.4),
+        0 0 80px var(--primary-color, 0.2),
         inset 0 1px 0 rgba(255, 255, 255, 0.1),
         inset 0 -1px 0 rgba(0, 0, 0, 0.5);
     transform: translateY(-2px);
@@ -332,15 +457,15 @@
 .Thugware-header {
     margin: 0;
     text-align: left;
-    font-size: 28px;
+    font-size: 24px;
     padding: 20px 20px;
     font-weight: 900;
-    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color), #00ff88);
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color), var(--primary-color));
     background-size: 300% 300%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    text-shadow: 0 0 40px rgba(0, 255, 64, 0.7);
+    text-shadow: 0 0 20px var(--primary-color, 0.5);
     position: relative;
     letter-spacing: 1px;
     animation: shimmer 3s ease-in-out infinite;
@@ -396,7 +521,7 @@
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(0, 255, 64, 0.2), transparent);
+    background: linear-gradient(90deg, transparent, var(--primary-color, 0.2), transparent);
     transition: left 0.6s ease;
 }
 
@@ -425,10 +550,10 @@
 .Thugware-button:hover {
     transform: translateY(-3px) scale(1.02);
     box-shadow: 
-        0 8px 25px rgba(0, 255, 64, 0.3),
-        0 0 0 2px rgba(0, 255, 64, 0.4),
+        0 8px 25px var(--primary-color, 0.3),
+        0 0 0 2px var(--primary-color, 0.4),
         inset 0 1px 0 rgba(255, 255, 255, 0.2);
-    background: linear-gradient(135deg, var(--background-tertiary) 0%, #3a3a3a 100%);
+    background: linear-gradient(135deg, var(--background-tertiary) 0%, var(--background-secondary) 100%);
 }
 
 .Thugware-button:active {
@@ -445,9 +570,9 @@
     color: #000;
     font-weight: 800;
     box-shadow: 
-        0 0 25px rgba(0, 255, 64, 0.6),
+        0 0 20px var(--primary-color, 0.5),
         inset 0 1px 0 rgba(255, 255, 255, 0.4),
-        0 4px 15px rgba(0, 255, 64, 0.3);
+        0 4px 15px var(--primary-color, 0.3);
     animation: glowPulse 2s ease-in-out infinite;
 }
 
@@ -479,7 +604,7 @@
 }
 
 .Thugware-button-container::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(180deg, var(--primary-color), #00ff88);
+    background: linear-gradient(180deg, var(--primary-color), var(--primary-color));
     box-shadow: 0 0 10px var(--primary-color);
 }
 
@@ -492,14 +617,18 @@
     border: none;
     color: #000;
     font-weight: 900;
-    box-shadow: 0 0 30px rgba(0, 255, 64, 0.6);
+    box-shadow: 0 0 20px var(--primary-color, 0.5);
     animation: float 3s ease-in-out infinite, glowPulse 2s ease-in-out infinite;
     transition: all 0.3s ease;
+    padding: 12px 15px;
+    border-radius: 0 8px 8px 0;
+    cursor: pointer;
+    font-size: 18px;
 }
 
 .Thugware-toggle:hover {
-    background: linear-gradient(135deg, #00ff60, #00ee44);
-    box-shadow: 0 0 40px rgba(0, 255, 64, 0.8);
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-color));
+    box-shadow: 0 0 30px var(--primary-color, 0.6);
     transform: scale(1.1);
 }
 
@@ -514,160 +643,53 @@
     border: 1px solid var(--danger-color);
     backdrop-filter: blur(10px);
     animation: glowPulse 3s ease-in-out infinite;
-    box-shadow: 0 0 20px rgba(255, 68, 68, 0.3);
+    box-shadow: 0 0 20px var(--danger-color, 0.3);
 }
 
-/* Стили для панели спама */
-.spam-selection-panel {
-    position: fixed;
-    width: 400px;
-    max-height: 700px;
-    overflow-y: auto;
-    border: 2px solid var(--danger-color);
-    background: linear-gradient(135deg, var(--background-primary) 0%, var(--background-secondary) 50%, var(--background-primary) 100%);
-    backdrop-filter: blur(15px) saturate(200%);
-    color: var(--text-primary);
-    box-shadow: 0 0 50px rgba(255, 68, 68, 0.4);
-    border-radius: var(--border-radius);
-    z-index: 1000000;
-    left: 450px;
-    top: 100px;
-    user-select: none;
-    font-family: 'Segoe UI', system-ui, sans-serif;
-    animation: slideIn 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-.spam-selection-header {
-    margin: 0;
-    text-align: center;
-    font-size: 24px;
-    padding: 15px 20px;
-    font-weight: 800;
-    background: linear-gradient(45deg, var(--danger-color), #ff6666, var(--danger-color));
-    background-size: 300% 300%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-shadow: 0 0 30px rgba(255, 68, 68, 0.5);
-    position: relative;
-    animation: shimmer 3s ease-in-out infinite;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.close-button {
-    background: none;
-    border: none;
-    color: var(--text-primary);
-    font-size: 20px;
-    cursor: pointer;
-    padding: 5px 10px;
-    border-radius: 5px;
-    transition: all 0.3s ease;
-}
-
-.close-button:hover {
-    background: rgba(255, 255, 255, 0.1);
-    transform: scale(1.1);
-}
-
-.spam-message-item {
-    padding: 12px 15px;
-    margin: 6px 12px;
-    border: none;
-    cursor: pointer;
-    background: linear-gradient(135deg, var(--background-secondary) 0%, var(--background-tertiary) 100%);
-    color: var(--text-primary);
-    font-size: 13px;
-    font-weight: 600;
-    border-radius: 10px;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    width: calc(100% - 24px);
-    text-align: left;
-    word-wrap: break-word;
-    white-space: normal;
-    height: auto;
-    min-height: 50px;
-    display: flex;
-    align-items: center;
-    backdrop-filter: blur(10px);
-}
-
-.spam-message-item:hover {
-    transform: translateY(-2px) scale(1.02);
-    box-shadow: 0 6px 20px rgba(255, 68, 68, 0.3);
-    background: linear-gradient(135deg, var(--background-tertiary) 0%, #3a2a2a 100%);
-}
-
-.spam-message-item.selected {
-    background: linear-gradient(135deg, var(--danger-color) 0%, #cc3333 100%);
-    color: #000;
-    font-weight: 700;
-    box-shadow: 0 0 20px rgba(255, 68, 68, 0.6);
-    animation: glowPulse 2s ease-in-out infinite;
-}
-
-.spam-checkbox {
-    margin-right: 12px;
-    width: 18px;
-    height: 18px;
-    accent-color: var(--danger-color);
-    transform: scale(1.2);
-}
-
-.spam-message-text {
-    flex: 1;
-    font-size: 12px;
-    line-height: 1.3;
-}
-
-.spam-controls {
+/* Стили для настроек */
+.config-content {
     padding: 15px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    background: rgba(0, 0, 0, 0.4);
-    position: sticky;
-    bottom: 0;
-    backdrop-filter: blur(15px);
 }
 
-.spam-control-input {
-    width: 100%;
-    padding: 10px;
-    margin: 8px 0;
-    background: var(--background-secondary);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 8px;
-    color: var(--text-primary);
-    font-size: 13px;
-    transition: all 0.3s ease;
+.config-section {
+    margin-bottom: 20px;
 }
 
-.spam-control-input:focus {
-    outline: none;
-    border-color: var(--danger-color);
-    box-shadow: 0 0 10px rgba(255, 68, 68, 0.3);
+.config-item {
+    margin-bottom: 15px;
 }
 
-.spam-control-label {
+.config-label {
     font-size: 12px;
-    color: var(--text-secondary);
+    color: var(--text-primary);
     margin-bottom: 5px;
     display: block;
     font-weight: 600;
 }
 
-.spam-selection-actions {
-    display: flex;
-    gap: 8px;
-    margin-top: 15px;
+.config-input {
+    width: 100%;
+    padding: 10px;
+    background: var(--background-secondary);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-size: 12px;
+    transition: all 0.3s ease;
 }
 
-.spam-action-button {
+.config-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 10px var(--primary-color, 0.3);
+}
+
+.config-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.config-btn {
     flex: 1;
     padding: 10px;
     border: none;
@@ -676,34 +698,18 @@
     font-size: 12px;
     font-weight: 700;
     transition: all 0.3s ease;
+    background: var(--background-secondary);
+    color: var(--text-primary);
 }
 
-.spam-action-button.primary {
+.config-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+}
+
+.config-btn.primary {
     background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
     color: #000;
-}
-
-.spam-action-button.secondary {
-    background: linear-gradient(135deg, #444, #666);
-    color: #fff;
-}
-
-.spam-action-button.danger {
-    background: linear-gradient(135deg, var(--danger-color), #cc3333);
-    color: #000;
-}
-
-.spam-action-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
-}
-
-.selected-count {
-    font-size: 12px;
-    color: var(--primary-color);
-    text-align: center;
-    margin: 8px 0;
-    font-weight: 700;
 }
 `]);
             const s = r
@@ -915,12 +921,12 @@
 
         // Система локализации
         const Localization = {
-            currentLang: 'ru',
+            currentLang: 'uk',
             
             translations: {
                 ru: {
                     // Заголовки
-                    panelTitle: "Custom By @linuxoidd",
+                    panelTitle: "ZoomK1ll3r",
                     participantsTitle: "Участники",
                     
                     // Вкладки
@@ -963,16 +969,33 @@
                     theme: "Тема",
                     russian: "Русский",
                     english: "Английский",
+                    ukrainian: "Украинский",
                     neon: "Неон",
                     cyber: "Киберпанк", 
                     ocean: "Океан",
+                    gold: "Золотой",
+                    matrix: "Матрица",
+                    forest: "Лес",
+                    lava: "Лава",
+                    royal: "Королевский",
+                    ice: "Ледяной",
+                    
+                    // Настройки
+                    panelSize: "Размер панели",
+                    small: "Маленький",
+                    medium: "Средний",
+                    large: "Большой",
+                    custom: "Пользовательский",
+                    backgroundOpacity: "Прозрачность фона",
+                    width: "Ширина",
+                    height: "Высота",
                     
                     // Предупреждения
                     warning: "Well Well Well",
                     useAtOwnRisk: "Используйте на свой страх и риск",
                     
                     // Инфо
-                    infoTitle: "Информация о ZOOMK1LL3R Panel",
+                    infoTitle: "Информация о ZoomK1ll3r Panel",
                     features: [
                         "Продвинутое управление Zoom встречами",
                         "Множество режимов спама и опций",
@@ -983,7 +1006,7 @@
                     ]
                 },
                 en: {
-                    panelTitle: "Custom By @linuxoidd",
+                    panelTitle: "ZoomK1ll3r",
                     participantsTitle: "Participants",
                     
                     mainTab: "Main",
@@ -1022,14 +1045,30 @@
                     theme: "Theme",
                     russian: "Russian",
                     english: "English",
+                    ukrainian: "Ukrainian",
                     neon: "Neon",
                     cyber: "Cyberpunk",
                     ocean: "Ocean",
+                    gold: "Gold",
+                    matrix: "Matrix",
+                    forest: "Forest",
+                    lava: "Lava",
+                    royal: "Royal",
+                    ice: "Ice",
+                    
+                    panelSize: "Panel Size",
+                    small: "Small",
+                    medium: "Medium",
+                    large: "Large",
+                    custom: "Custom",
+                    backgroundOpacity: "Background Opacity",
+                    width: "Width",
+                    height: "Height",
                     
                     warning: "Well Well Well",
                     useAtOwnRisk: "Use at your own risk",
                     
-                    infoTitle: "ZOOMK1LL3R Panel Information",
+                    infoTitle: "ZoomK1ll3r Panel Information",
                     features: [
                         "Advanced Zoom meeting controls",
                         "Multiple spam modes and options",
@@ -1037,6 +1076,87 @@
                         "Real-time media manipulation",
                         "Customizable interface",
                         "Secure and anonymous"
+                    ]
+                },
+                uk: {
+                    // Заголовки
+                    panelTitle: "ZoomK1ll3r",
+                    participantsTitle: "Учасники",
+                    
+                    // Вкладки
+                    mainTab: "Головна",
+                    cfgTab: "Налаштування", 
+                    miscTab: "Різне",
+                    infoTab: "Інфо",
+                    
+                    // Розділи
+                    mediaSection: "🎥 МЕДІА",
+                    spamSection: "💬 СПАМ",
+                    botsSection: "🤖 БОТИ",
+                    accountSection: "👤 АКАУНТ",
+                    systemSection: "⚙️ СИСТЕМА",
+                    adminSection: "🔐 АДМІНІСТРУВАННЯ",
+                    
+                    // Кнопки
+                    enableMic: "Увімкнути мікрофон",
+                    enableCam: "Увімкнути камеру",
+                    recordUsers: "Запис учасників",
+                    spamHands: "Спам підняттям руки",
+                    spamDef: "Спам деф",
+                    spamReactions: "Спам реакціями",
+                    spamNames: "Спам іменами",
+                    spamCustom: "Спам кастом",
+                    spamAI: "Спам запитами ШІ",
+                    spamScreenshare: "Спам запитами демонстрації",
+                    botMeeting: "Бот зустріч",
+                    floodMeeting: "Флуд зустрічі",
+                    stealName: "Крадіжка ніку",
+                    autoReconnect: "Авто перепідключення",
+                    hideNotifications: "Приховати сповіщення",
+                    hideReactions: "Приховати реакції",
+                    anonymousBoard: "Анонімна дошка",
+                    hostKeyBrute: "Підбір ключа хоста",
+                    autoRaid: "🚀 АВТО РЕЙД",
+                    
+                    // Misc
+                    language: "Мова",
+                    theme: "Тема",
+                    russian: "Російська",
+                    english: "Англійська",
+                    ukrainian: "Українська",
+                    neon: "Неон",
+                    cyber: "Кіберпанк", 
+                    ocean: "Океан",
+                    gold: "Золотий",
+                    matrix: "Матриця",
+                    forest: "Ліс",
+                    lava: "Лава",
+                    royal: "Королівський",
+                    ice: "Крижаний",
+                    
+                    // Налаштування
+                    panelSize: "Розмір панелі",
+                    small: "Маленький",
+                    medium: "Середній",
+                    large: "Великий",
+                    custom: "Користувацький",
+                    backgroundOpacity: "Прозорість фону",
+                    width: "Ширина",
+                    height: "Висота",
+                    
+                    // Попередження
+                    warning: "Well Well Well",
+                    useAtOwnRisk: "Використовуйте на свій страх і ризик",
+                    
+                    // Інфо
+                    infoTitle: "Інформація про ZoomK1ll3r Panel",
+                    features: [
+                        "Розширене керування Zoom зустрічами",
+                        "Багато режимів спаму та опцій",
+                        "Система керування ботами",
+                        "Маніпуляція медіа в реальному часі",
+                        "Налаштовуваний інтерфейс",
+                        "Безпечно та анонімно"
                     ]
                 }
             },
@@ -1061,7 +1181,7 @@
                     }
                 } catch (e) {
                     console.warn('Ошибка загрузки языка:', e);
-                    this.currentLang = 'ru'; // fallback на русский
+                    this.currentLang = 'uk'; // fallback на украинский
                 }
             },
             
@@ -1092,6 +1212,30 @@
                 ocean: {
                     name: 'ocean',
                     class: 'theme-ocean'
+                },
+                gold: {
+                    name: 'gold',
+                    class: 'theme-gold'
+                },
+                matrix: {
+                    name: 'matrix',
+                    class: 'theme-matrix'
+                },
+                forest: {
+                    name: 'forest',
+                    class: 'theme-forest'
+                },
+                lava: {
+                    name: 'lava',
+                    class: 'theme-lava'
+                },
+                royal: {
+                    name: 'royal',
+                    class: 'theme-royal'
+                },
+                ice: {
+                    name: 'ice',
+                    class: 'theme-ice'
                 }
             },
             
@@ -1107,7 +1251,11 @@
                     this.currentTheme = themeName;
                     
                     // Удаляем все классы тем
-                    document.body.classList.remove('theme-neon', 'theme-cyber', 'theme-ocean');
+                    document.body.classList.remove(
+                        'theme-neon', 'theme-cyber', 'theme-ocean', 
+                        'theme-gold', 'theme-matrix', 'theme-forest',
+                        'theme-lava', 'theme-royal', 'theme-ice'
+                    );
                     
                     // Применяем выбранную тему
                     if (themeName !== 'default') {
@@ -1132,15 +1280,111 @@
             }
         };
 
+        // Менеджер размера панели
+        const SizeManager = {
+            sizes: {
+                small: { width: 350, height: 500 },
+                medium: { width: 380, height: 600 },
+                large: { width: 450, height: 700 }
+            },
+            
+            currentSize: 'medium',
+            
+            init() {
+                this.loadSize();
+            },
+            
+            setSize(sizeName) {
+                try {
+                    if (this.sizes[sizeName]) {
+                        this.currentSize = sizeName;
+                        const size = this.sizes[sizeName];
+                        this.applySize(size.width, size.height);
+                        SafeStorage.setItem('thugware-size', sizeName);
+                    }
+                } catch (e) {
+                    console.warn('Ошибка установки размера:', e);
+                }
+            },
+            
+            setCustomSize(width, height) {
+                try {
+                    this.applySize(width, height);
+                    SafeStorage.setItem('thugware-custom-width', width);
+                    SafeStorage.setItem('thugware-custom-height', height);
+                    this.currentSize = 'custom';
+                } catch (e) {
+                    console.warn('Ошибка установки кастомного размера:', e);
+                }
+            },
+            
+            applySize(width, height) {
+                if (window.thugwarePanel && window.thugwarePanel.panel) {
+                    window.thugwarePanel.panel.style.width = width + 'px';
+                    window.thugwarePanel.panel.style.height = height + 'px';
+                }
+            },
+            
+            loadSize() {
+                try {
+                    const savedSize = SafeStorage.getItem('thugware-size');
+                    if (savedSize && this.sizes[savedSize]) {
+                        this.setSize(savedSize);
+                    } else if (savedSize === 'custom') {
+                        const width = SafeStorage.getItem('thugware-custom-width');
+                        const height = SafeStorage.getItem('thugware-custom-height');
+                        if (width && height) {
+                            this.setCustomSize(parseInt(width), parseInt(height));
+                        }
+                    }
+                } catch (e) {
+                    console.warn('Ошибка загрузки размера:', e);
+                }
+            }
+        };
+
+        // Менеджер прозрачности фона
+        const BackgroundManager = {
+            currentOpacity: 1,
+            
+            init() {
+                this.loadOpacity();
+            },
+            
+            setOpacity(opacity) {
+                try {
+                    this.currentOpacity = opacity;
+                    document.documentElement.style.setProperty('--background-opacity', opacity);
+                    SafeStorage.setItem('thugware-bg-opacity', opacity);
+                } catch (e) {
+                    console.warn('Ошибка установки прозрачности:', e);
+                }
+            },
+            
+            loadOpacity() {
+                try {
+                    const savedOpacity = SafeStorage.getItem('thugware-bg-opacity');
+                    if (savedOpacity) {
+                        this.currentOpacity = parseFloat(savedOpacity);
+                        document.documentElement.style.setProperty('--background-opacity', this.currentOpacity);
+                    }
+                } catch (e) {
+                    console.warn('Ошибка загрузки прозрачности:', e);
+                }
+            }
+        };
+
         // Инициализация систем
         try {
             Localization.init();
             ThemeManager.init();
+            SizeManager.init();
+            BackgroundManager.init();
         } catch (e) {
             console.warn('Ошибка инициализации систем:', e);
         }
 
-        // Основной код функций
+        // [Остальной код функций остается без изменений...]
         let e = null, t = null, o = !1;
         const a = function () {
             o = !o;
@@ -1725,6 +1969,12 @@
                     
                     this.switchTab('main');
                     
+                    // Применяем сохраненный размер
+                    SizeManager.loadSize();
+                    
+                    // Применяем сохраненную прозрачность
+                    BackgroundManager.init();
+                    
                     // Сохраняем ссылку для обновления локализации
                     window.thugwarePanel = this;
                 } catch (error) {
@@ -1783,20 +2033,86 @@
             }
             
             createCfgContent() {
-                const comingSoon = document.createElement("div");
-                comingSoon.className = "coming-soon";
+                const configContent = document.createElement("div");
+                configContent.className = "config-content";
                 
-                const text = document.createElement("div");
-                text.className = "coming-soon-text";
-                text.textContent = "Coming Soon";
+                // Настройки размера
+                const sizeSection = document.createElement("div");
+                sizeSection.className = "config-section";
                 
-                const subtext = document.createElement("div");
-                subtext.className = "coming-soon-subtext";
-                subtext.textContent = "Configuration options will be available in future updates";
+                const sizeTitle = document.createElement("div");
+                sizeTitle.className = "selector-title";
+                sizeTitle.textContent = Localization.t('panelSize');
+                sizeSection.appendChild(sizeTitle);
                 
-                comingSoon.appendChild(text);
-                comingSoon.appendChild(subtext);
-                this.cfgTab.appendChild(comingSoon);
+                const sizeButtons = document.createElement("div");
+                sizeButtons.className = "size-buttons";
+                
+                const sizes = ['small', 'medium', 'large', 'custom'];
+                sizes.forEach(size => {
+                    const sizeBtn = document.createElement("button");
+                    sizeBtn.className = `size-btn ${SizeManager.currentSize === size ? 'active' : ''}`;
+                    sizeBtn.textContent = Localization.t(size);
+                    sizeBtn.addEventListener('click', () => {
+                        if (size === 'custom') {
+                            const width = prompt(Localization.t('width'), "400");
+                            const height = prompt(Localization.t('height'), "500");
+                            if (width && height) {
+                                SizeManager.setCustomSize(parseInt(width), parseInt(height));
+                            }
+                        } else {
+                            SizeManager.setSize(size);
+                        }
+                        this.updateSizeButtons();
+                    });
+                    sizeButtons.appendChild(sizeBtn);
+                });
+                
+                sizeSection.appendChild(sizeButtons);
+                
+                // Настройки прозрачности
+                const opacitySection = document.createElement("div");
+                opacitySection.className = "config-section";
+                
+                const opacityTitle = document.createElement("div");
+                opacityTitle.className = "selector-title";
+                opacityTitle.textContent = Localization.t('backgroundOpacity');
+                opacitySection.appendChild(opacityTitle);
+                
+                const opacitySlider = document.createElement("input");
+                opacitySlider.type = "range";
+                opacitySlider.className = "background-slider";
+                opacitySlider.min = "0.1";
+                opacitySlider.max = "1";
+                opacitySlider.step = "0.05";
+                opacitySlider.value = BackgroundManager.currentOpacity;
+                
+                const sliderContainer = document.createElement("div");
+                sliderContainer.className = "slider-container";
+                
+                const sliderLabel = document.createElement("div");
+                sliderLabel.className = "slider-label";
+                sliderLabel.textContent = Localization.t('backgroundOpacity') + ":";
+                
+                const sliderValue = document.createElement("div");
+                sliderValue.className = "slider-value";
+                sliderValue.textContent = Math.round(BackgroundManager.currentOpacity * 100) + "%";
+                
+                opacitySlider.addEventListener('input', (e) => {
+                    const value = parseFloat(e.target.value);
+                    BackgroundManager.setOpacity(value);
+                    sliderValue.textContent = Math.round(value * 100) + "%";
+                });
+                
+                sliderContainer.appendChild(sliderLabel);
+                sliderContainer.appendChild(opacitySlider);
+                sliderContainer.appendChild(sliderValue);
+                opacitySection.appendChild(sliderContainer);
+                
+                configContent.appendChild(sizeSection);
+                configContent.appendChild(opacitySection);
+                
+                this.cfgTab.appendChild(configContent);
             }
             
             createMiscContent() {
@@ -1815,24 +2131,19 @@
                 const langButtons = document.createElement("div");
                 langButtons.className = "language-buttons";
                 
-                const ruBtn = document.createElement("button");
-                ruBtn.className = `lang-btn ${Localization.currentLang === 'ru' ? 'active' : ''}`;
-                ruBtn.textContent = Localization.t('russian');
-                ruBtn.addEventListener('click', () => {
-                    Localization.setLanguage('ru');
-                    this.updateLanguageButtons();
+                const languages = ['russian', 'english', 'ukrainian'];
+                languages.forEach(lang => {
+                    const langBtn = document.createElement("button");
+                    langBtn.className = `lang-btn ${Localization.currentLang === lang ? 'active' : ''}`;
+                    langBtn.textContent = Localization.t(lang);
+                    langBtn.addEventListener('click', () => {
+                        const langMap = { russian: 'ru', english: 'en', ukrainian: 'uk' };
+                        Localization.setLanguage(langMap[lang]);
+                        this.updateLanguageButtons();
+                    });
+                    langButtons.appendChild(langBtn);
                 });
                 
-                const enBtn = document.createElement("button");
-                enBtn.className = `lang-btn ${Localization.currentLang === 'en' ? 'active' : ''}`;
-                enBtn.textContent = Localization.t('english');
-                enBtn.addEventListener('click', () => {
-                    Localization.setLanguage('en');
-                    this.updateLanguageButtons();
-                });
-                
-                langButtons.appendChild(ruBtn);
-                langButtons.appendChild(enBtn);
                 languageSection.appendChild(langButtons);
                 
                 // Выбор темы
@@ -1847,7 +2158,7 @@
                 const themeButtons = document.createElement("div");
                 themeButtons.className = "theme-buttons";
                 
-                const themes = ['neon', 'cyber', 'ocean'];
+                const themes = ['neon', 'cyber', 'ocean', 'gold', 'matrix', 'forest', 'lava', 'royal', 'ice'];
                 themes.forEach(theme => {
                     const themeBtn = document.createElement("button");
                     themeBtn.className = `theme-btn ${ThemeManager.currentTheme === theme ? 'active' : ''}`;
@@ -1889,7 +2200,7 @@
                 
                 const warning = document.createElement("div");
                 warning.className = "warning-text";
-                warning.textContent = Localization.t('useAtOwnRisk');
+                warning.textContent = Localization.t('warning');
                 infoContent.appendChild(warning);
                 
                 this.infoTab.appendChild(infoContent);
@@ -1899,7 +2210,8 @@
                 const langButtons = this.miscTab.querySelectorAll('.lang-btn');
                 langButtons.forEach(btn => {
                     btn.classList.remove('active');
-                    if (btn.textContent === Localization.t(Localization.currentLang === 'ru' ? 'russian' : 'english')) {
+                    const langMap = { 'Русский': 'ru', 'Russian': 'ru', 'English': 'en', 'Українська': 'uk', 'Ukrainian': 'uk' };
+                    if (langMap[btn.textContent] === Localization.currentLang) {
                         btn.classList.add('active');
                     }
                 });
@@ -1913,6 +2225,19 @@
                         key => Localization.t(key) === btn.textContent
                     );
                     if (themeName === ThemeManager.currentTheme) {
+                        btn.classList.add('active');
+                    }
+                });
+            }
+            
+            updateSizeButtons() {
+                const sizeButtons = this.cfgTab.querySelectorAll('.size-btn');
+                sizeButtons.forEach(btn => {
+                    btn.classList.remove('active');
+                    const sizeName = Object.keys(SizeManager.sizes).find(
+                        key => Localization.t(key) === btn.textContent
+                    ) || 'custom';
+                    if (sizeName === SizeManager.currentSize) {
                         btn.classList.add('active');
                     }
                 });
@@ -1932,6 +2257,7 @@
                     
                     // Обновляем содержимое вкладок
                     this.updateMainTab();
+                    this.updateCfgTab();
                     this.updateMiscTab();
                     this.updateInfoTab();
                 } catch (error) {
@@ -1949,11 +2275,21 @@
                 }
             }
             
+            updateCfgTab() {
+                try {
+                    // Очищаем и пересоздаем содержимое вкладки настроек
+                    this.cfgTab.innerHTML = '';
+                    this.createCfgContent();
+                } catch (error) {
+                    console.error('Ошибка обновления вкладки настроек:', error);
+                }
+            }
+            
             updateMiscTab() {
                 try {
-                    // Обновляем кнопки в misc вкладке
-                    this.updateLanguageButtons();
-                    this.updateThemeButtons();
+                    // Очищаем и пересоздаем содержимое misc вкладки
+                    this.miscTab.innerHTML = '';
+                    this.createMiscContent();
                 } catch (error) {
                     console.error('Ошибка обновления misc вкладки:', error);
                 }
@@ -2099,19 +2435,10 @@
             
             initToggleButton() {
                 try {
-                    let toggleButton = document.createElement("div");
-                    toggleButton.textContent = "💣";
-                    toggleButton.style.position = "fixed";
-                    toggleButton.style.top = "50px";
-                    toggleButton.style.left = "0px";
-                    toggleButton.style.padding = "10px 10px";
-                    toggleButton.style.backgroundColor = "rgba(25, 25, 25, 0.75)";
-                    toggleButton.style.border = "1px solid rgb(0 255 10)";
-                    toggleButton.style.color = "#fff";
-                    toggleButton.style.borderRadius = "0 5px 5px 0";
-                    toggleButton.style.cursor = "pointer";
-                    toggleButton.style.zIndex = "9999999";
-                    toggleButton.style.userSelect = "none";
+                    let toggleButton = document.createElement("button");
+                    toggleButton.textContent = "💀";
+                    toggleButton.className = "Thugware-toggle";
+                    toggleButton.title = "Toggle Panel";
                     toggleButton.addEventListener("click", this.toggle.bind(this));
                     
                     let isDragging = false;
