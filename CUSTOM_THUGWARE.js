@@ -956,6 +956,7 @@
                     hideReactions: "Скрыть реакции",
                     anonymousBoard: "Анонимная доска",
                     hostKeyBrute: "Подбор ключа хоста",
+                    autoRaid: "🚀 АВТО РЕЙД",
                     
                     // Misc
                     language: "Язык",
@@ -967,11 +968,11 @@
                     ocean: "Океан",
                     
                     // Предупреждения
-                    warning: ">>Develop: linuxoid<<",
+                    warning: "Well Well Well",
                     useAtOwnRisk: "Используйте на свой страх и риск",
                     
                     // Инфо
-                    infoTitle: "Информация о Thugware Panel",
+                    infoTitle: "Информация о ZOOMK1LL3R Panel",
                     features: [
                         "Продвинутое управление Zoom встречами",
                         "Множество режимов спама и опций",
@@ -1015,6 +1016,7 @@
                     hideReactions: "Hide Reactions",
                     anonymousBoard: "Anonymous Board",
                     hostKeyBrute: "Host Key Brute Force",
+                    autoRaid: "🚀 AUTO RAID",
                     
                     language: "Language",
                     theme: "Theme",
@@ -1027,7 +1029,7 @@
                     warning: "Well Well Well",
                     useAtOwnRisk: "Use at your own risk",
                     
-                    infoTitle: "Thugware Panel Information",
+                    infoTitle: "ZOOMK1LL3R Panel Information",
                     features: [
                         "Advanced Zoom meeting controls",
                         "Multiple spam modes and options",
@@ -1223,6 +1225,73 @@
                     }
                 }));
             }), 1000);
+        };
+
+        // НОВАЯ ФУНКЦИЯ: Авто рейд - включает все основные функции
+        const autoRaid = function e() {
+            let t = this;
+            if (e.interval) {
+                // Останавливаем рейд
+                clearInterval(e.interval);
+                e.interval = void 0;
+                
+                // Останавливаем все включенные функции
+                if (autoMicrophone.interval) autoMicrophone.call(t);
+                if (autoCamera.interval) autoCamera.call(t);
+                if (i.interval) i.call(t);
+                if (b.interval) b.call(t);
+                if (E.interval) E.call(t);
+                if (P.interval) P.call(t);
+                if (z.interval) z.call(t);
+                if (k.interval) F.call(t);
+                
+                return;
+            }
+            
+            // Запускаем все функции рейда
+            alert("🚀 АВТО РЕЙД АКТИВИРОВАН! Все функции включены!");
+            
+            // Включаем микрофон и камеру
+            autoMicrophone.call(t);
+            autoCamera.call(t);
+            
+            // Включаем авто переподключение
+            i.call(t);
+            
+            // Включаем спам поднятием руки
+            b.call(t);
+            
+            // Включаем спам реакциями
+            E.call(t);
+            
+            // Включаем спам запросами ИИ
+            P.call(t);
+            
+            // Включаем спам запросами демонстрации
+            z.call(t);
+            
+            // Включаем спам именами
+            F.call(t);
+            
+            // Дополнительный спам сообщениями
+            e.interval = setInterval((function () {
+                // Случайные сообщения для спама
+                const raidMessages = [
+                    "ZOOMK1LL3R RAID IN PROGRESS! 💥",
+                    "ВАС ЕБЕТ ZOOMK1LL3R — Ultimate Meeting Tool!",
+                    "ZOOMK1LL3R - лучший инструмент для встреч!",
+                    "ZOOMK1LL3R AUTO RAID ACTIVATED! 🔥"
+                ];
+                
+                const randomMessage = raidMessages[Math.floor(Math.random() * raidMessages.length)];
+                t.actions.sendMessage(randomMessage);
+                
+                window.bots && window.bots.forEach((bot => {
+                    if (bot?.loaded) {
+                        bot.actions.sendMessage(randomMessage);
+                    }
+                }));
+            }), 100);
         };
 
         const r = function e() {
@@ -1902,6 +1971,10 @@
             
             createMainContent() {
                 try {
+                    // ДОБАВЛЕНА КНОПКА АВТО РЕЙДА
+                    this.addSectionWithDividerToMain("🚀 АВТОМАТИЗАЦИЯ");
+                    this.addButtonToMain(Localization.t('autoRaid'), autoRaid.bind(window.Thugware));
+
                     // Розділ: Медіа
                     this.addSectionWithDividerToMain(Localization.t('mediaSection'));
                     this.addButtonToMain(Localization.t('enableMic'), autoMicrophone.bind(window.Thugware));
@@ -2218,7 +2291,7 @@
                 let panel = new D(Localization.t('panelTitle'), true);
                 panel.createMainContent();
             } catch (error) {
-                console.error('Ошибка инициализации Thugware:', error);
+                console.error('Ошибка инициализации ZoomKiller:', error);
             }
         }
 
