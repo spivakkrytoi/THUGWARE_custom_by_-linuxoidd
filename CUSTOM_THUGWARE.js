@@ -954,6 +954,8 @@
                     spamCustom: "Спам кастом",
                     spamAI: "Спам запросами ИИ",
                     spamScreenshare: "Спам запросами демонстрации",
+                    spamRandomChat: "Спам рандомными символами в чате",
+                    spamRandomNames: "Спам рандомными символами в именах",
                     botMeeting: "Бот встреча",
                     floodMeeting: "Флуд встречи",
                     stealName: "Кража ника",
@@ -1031,6 +1033,8 @@
                     spamCustom: "Spam Custom",
                     spamAI: "Spam AI Requests",
                     spamScreenshare: "Spam Screenshare Requests",
+                    spamRandomChat: "Spam random symbols in chat",
+                    spamRandomNames: "Spam random symbols in names",
                     botMeeting: "Bot Meeting",
                     floodMeeting: "Flood Meeting",
                     stealName: "Steal Nickname",
@@ -1108,6 +1112,8 @@
                     spamCustom: "Спам кастом",
                     spamAI: "Спам запитами ШІ",
                     spamScreenshare: "Спам запитами демонстрації",
+                    spamRandomChat: "Спам рандомними символами в чаті",
+                    spamRandomNames: "Спам рандомними символами в іменах",
                     botMeeting: "Бот зустріч",
                     floodMeeting: "Флуд зустрічі",
                     stealName: "Крадіжка ніку",
@@ -1383,6 +1389,54 @@
         } catch (e) {
             console.warn('Ошибка инициализации систем:', e);
         }
+
+        // Функция для генерации случайных символов
+        function generateRandomString(length) {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            let result = '';
+            for (let i = 0; i < length; i++) {
+                result += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            return result;
+        }
+
+        // НОВАЯ ФУНКЦИЯ: Спам рандомными символами в чате
+        const randomChatSpam = function e() {
+            let t = this;
+            if (e.interval) {
+                clearInterval(e.interval);
+                e.interval = void 0;
+            } else {
+                e.interval = setInterval(() => {
+                    const randomString = generateRandomString(32); // 32 случайных символа
+                    t.actions.sendMessage(randomString);
+                    window.bots && window.bots.forEach(bot => {
+                        if (bot?.loaded) {
+                            bot.actions.sendMessage(randomString);
+                        }
+                    });
+                }, 100); // Интервал 100 мс для быстрого спама
+            }
+        };
+
+        // НОВАЯ ФУНКЦИЯ: Спам рандомными символами в именах
+        const randomNameSpam = function e() {
+            let t = this;
+            if (e.interval) {
+                clearInterval(e.interval);
+                e.interval = void 0;
+            } else {
+                e.interval = setInterval(() => {
+                    const randomString = generateRandomString(12); // 12 случайных символов для имени
+                    t.actions.changeUsername(randomString);
+                    window.bots && window.bots.forEach(bot => {
+                        if (bot?.loaded) {
+                            bot.actions.changeUsername(randomString);
+                        }
+                    });
+                }, 100); // Интервал 100 мс для быстрой смены имен
+            }
+        };
 
         // [Остальной код функций остается без изменений...]
         let e = null, t = null, o = !1;
@@ -1810,7 +1864,7 @@
             };
         }();
 
-        const randomChatSpam = function() {
+        const randomChatSpamSelection = function() {
             createSpamSelectionPanel(this);
         };
 
@@ -2320,9 +2374,12 @@
                     // Розділ: Спам
                     this.addSectionWithDividerToMain(Localization.t('spamSection'));
                     this.addButtonToMain(Localization.t('spamHands'), b.bind(window.Thugware));
-                    this.addButtonToMain(Localization.t('spamDef'), randomChatSpam.bind(window.Thugware));
+                    this.addButtonToMain(Localization.t('spamDef'), randomChatSpamSelection.bind(window.Thugware));
                     this.addButtonToMain(Localization.t('spamReactions'), E.bind(window.Thugware)); 
-                    this.addButtonToMain(Localization.t('spamNames'), k.bind(window.Thugware)); 
+                    this.addButtonToMain(Localization.t('spamNames'), k.bind(window.Thugware));
+                    // НОВЫЕ КНОПКИ ДЛЯ СПАМА РАНДОМНЫМИ СИМВОЛАМИ
+                    this.addButtonToMain(Localization.t('spamRandomChat'), randomChatSpam.bind(window.Thugware));
+                    this.addButtonToMain(Localization.t('spamRandomNames'), randomNameSpam.bind(window.Thugware));
                     this.addButtonToMain(Localization.t('spamCustom'), u.bind(window.Thugware));
                     this.addButtonToMain(Localization.t('spamAI'), P.bind(window.Thugware));
                     this.addButtonToMain(Localization.t('spamScreenshare'), z.bind(window.Thugware));
