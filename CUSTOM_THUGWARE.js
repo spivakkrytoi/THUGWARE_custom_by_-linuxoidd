@@ -113,7 +113,7 @@
     padding: 15px;
 }
 
-.language-selector, .theme-selector, .size-selector, .background-selector {
+.language-selector, .theme-selector, .size-selector, .background-selector, .config-selector {
     margin-bottom: 20px;
 }
 
@@ -124,14 +124,14 @@
     margin-bottom: 10px;
 }
 
-.language-buttons, .theme-buttons, .size-buttons {
+.language-buttons, .theme-buttons, .size-buttons, .config-buttons {
     display: flex;
     gap: 10px;
     margin-bottom: 15px;
     flex-wrap: wrap;
 }
 
-.lang-btn, .theme-btn, .size-btn {
+.lang-btn, .theme-btn, .size-btn, .config-btn {
     flex: 1;
     min-width: 80px;
     padding: 10px;
@@ -144,15 +144,27 @@
     font-size: 12px;
 }
 
-.lang-btn:hover, .theme-btn:hover, .size-btn:hover {
+.lang-btn:hover, .theme-btn:hover, .size-btn:hover, .config-btn:hover {
     background: rgba(255, 255, 255, 0.1);
     transform: translateY(-2px);
 }
 
-.lang-btn.active, .theme-btn.active, .size-btn.active {
+.lang-btn.active, .theme-btn.active, .size-btn.active, .config-btn.active {
     background: var(--primary-color);
     color: #000;
     font-weight: 700;
+}
+
+.config-btn.mango.active {
+    background: linear-gradient(135deg, #ff6b00, #ffa500);
+    color: #000;
+    animation: glowPulse 2s ease-in-out infinite;
+}
+
+.config-btn.pencil.active {
+    background: linear-gradient(135deg, #9b30ff, #6a0dad);
+    color: #000;
+    animation: glowPulse 2s ease-in-out infinite;
 }
 
 .background-controls {
@@ -240,6 +252,160 @@
     margin: 8px 0;
     border-left: 3px solid var(--primary-color);
     color: var(--text-primary);
+}
+
+/* Стилі для панелі спама */
+.spam-selection-panel {
+    position: fixed;
+    width: 450px;
+    max-height: 600px;
+    overflow-y: auto;
+    border: 2px solid var(--danger-color);
+    background: linear-gradient(135deg, var(--background-primary) 0%, var(--background-secondary) 50%, var(--background-primary) 100%);
+    backdrop-filter: blur(15px) saturate(200%);
+    color: var(--text-primary);
+    box-shadow: 0 0 50px rgba(255, 68, 68, 0.4);
+    border-radius: var(--border-radius);
+    z-index: 1000001;
+    left: 500px;
+    top: 100px;
+    user-select: none;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    animation: slideIn 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.spam-selection-header {
+    margin: 0;
+    text-align: center;
+    font-size: 20px;
+    padding: 15px 20px;
+    font-weight: 800;
+    background: linear-gradient(45deg, var(--danger-color), #ff6666, var(--danger-color));
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 0 30px rgba(255, 68, 68, 0.5);
+    position: relative;
+    animation: shimmer 3s ease-in-out infinite;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.close-button {
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    font-size: 20px;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+
+.close-button:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: scale(1.1);
+}
+
+.spam-message-item {
+    padding: 12px 15px;
+    margin: 8px 15px;
+    border: none;
+    cursor: pointer;
+    background: linear-gradient(135deg, var(--background-secondary) 0%, var(--background-tertiary) 100%);
+    color: var(--text-primary);
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    backdrop-filter: blur(10px);
+}
+
+.spam-message-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 68, 68, 0.3);
+    background: linear-gradient(135deg, var(--background-tertiary) 0%, #3a2a2a 100%);
+}
+
+.spam-message-item.selected {
+    background: linear-gradient(135deg, var(--danger-color) 0%, #cc3333 100%);
+    color: #000;
+    font-weight: 700;
+    box-shadow: 0 0 20px rgba(255, 68, 68, 0.6);
+    animation: glowPulse 2s ease-in-out infinite;
+}
+
+.spam-checkbox {
+    margin-right: 12px;
+    width: 16px;
+    height: 16px;
+    accent-color: var(--danger-color);
+}
+
+.spam-message-text {
+    flex: 1;
+    font-size: 11px;
+    line-height: 1.3;
+    word-break: break-word;
+}
+
+.spam-controls {
+    padding: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.3);
+    position: sticky;
+    bottom: 0;
+    backdrop-filter: blur(15px);
+}
+
+.spam-control-input {
+    width: 100%;
+    padding: 8px 12px;
+    margin: 5px 0;
+    background: var(--background-secondary);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    color: var(--text-primary);
+    font-size: 12px;
+    transition: all 0.3s ease;
+}
+
+.spam-control-input:focus {
+    outline: none;
+    border-color: var(--danger-color);
+    box-shadow: 0 0 10px rgba(255, 68, 68, 0.3);
+}
+
+.spam-action-button {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: #000;
+}
+
+.spam-action-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+}
+
+.spam-action-button.stop {
+    background: linear-gradient(135deg, var(--danger-color), #cc3333);
 }
 
 :root {
@@ -346,6 +512,27 @@
   --background-primary: #001a1a;
   --background-secondary: #002a2a;
   --background-tertiary: #003a3a;
+}
+
+/* Новые темы для конфигураций */
+.theme-mango {
+  --primary-color: #ff6b00;
+  --secondary-color: #ffa500;
+  --danger-color: #ff4444;
+  --warning-color: #ffff00;
+  --background-primary: #1a0f00;
+  --background-secondary: #2a1a00;
+  --background-tertiary: #3a2a00;
+}
+
+.theme-pencil {
+  --primary-color: #9b30ff;
+  --secondary-color: #6a0dad;
+  --danger-color: #ff00ff;
+  --warning-color: #ffaa00;
+  --background-primary: #0a001a;
+  --background-secondary: #1a002a;
+  --background-tertiary: #2a003a;
 }
 
 /* Анимации */
@@ -966,6 +1153,10 @@
                     hostKeyBrute: "Подбор ключа хоста",
                     autoRaid: "🚀 АВТО РЕЙД",
                     
+                    // Конфигурации
+                    mangoConfig: "MANGO🥭🥭🥭",
+                    pencilConfig: "PENCIL🍆",
+                    
                     // Misc
                     language: "Язык",
                     theme: "Тема",
@@ -1045,6 +1236,10 @@
                     hostKeyBrute: "Host Key Brute Force",
                     autoRaid: "🚀 AUTO RAID",
                     
+                    // Конфигурации
+                    mangoConfig: "MANGO🥭🥭🥭",
+                    pencilConfig: "PENCIL🍆",
+                    
                     language: "Language",
                     theme: "Theme",
                     russian: "Russian",
@@ -1123,6 +1318,10 @@
                     anonymousBoard: "Анонімна дошка",
                     hostKeyBrute: "Підбір ключа хоста",
                     autoRaid: "🚀 АВТО РЕЙД",
+                    
+                    // Конфігурації
+                    mangoConfig: "MANGO🥭🥭🥭",
+                    pencilConfig: "PENCIL🍆",
                     
                     // Misc
                     language: "Мова",
@@ -1242,6 +1441,14 @@
                 ice: {
                     name: 'ice',
                     class: 'theme-ice'
+                },
+                mango: {
+                    name: 'mango',
+                    class: 'theme-mango'
+                },
+                pencil: {
+                    name: 'pencil',
+                    class: 'theme-pencil'
                 }
             },
             
@@ -1260,7 +1467,8 @@
                     document.body.classList.remove(
                         'theme-neon', 'theme-cyber', 'theme-ocean', 
                         'theme-gold', 'theme-matrix', 'theme-forest',
-                        'theme-lava', 'theme-royal', 'theme-ice'
+                        'theme-lava', 'theme-royal', 'theme-ice',
+                        'theme-mango', 'theme-pencil'
                     );
                     
                     // Применяем выбранную тему
@@ -1380,12 +1588,331 @@
             }
         };
 
+        // ОБНОВЛЕННАЯ СИСТЕМА КОНФИГУРАЦИЙ - ОЧЕНЬ БЫСТРЫЙ СПАМ
+        const ConfigManager = {
+            currentConfig: null,
+            configs: {
+                mango: {
+                    name: 'MANGO🥭🥭🥭',
+                    theme: 'mango',
+                    toggleEmoji: '🥭',
+                    chatMessages: [
+                        "REID BY MANGOS🥭",
+                        "MANGO🥭MANGO🥭MANGO🥭MANGO🥭MANGO🥭MANGO🥭",
+                        "YOU ARE FUCKING BY MANGO🥭🥭🥭",
+                        "MANGO RAID IN PROGRESS! 🥭🥭🥭",
+                        "MANGO ARMY ATTACK! 🥭🥭🥭",
+                        "MANGO POWER! 🥭🥭🥭",
+                        "MANGO DESTROYER! 🥭🥭🥭",
+                        "MANGO SPAM! 🥭🥭🥭"
+                    ],
+                    nameVariants: ["MANGO🥭", "MANGO LOVER🥭", "MANGO KING🥭", "MANGO RAID🥭", "MANGO SPAM🥭", "MANGO BOSS🥭", "MANGO GOD🥭", "MANGO MASTER🥭"],
+                    reactions: ["🥭", "🍈", "🍊", "🍋", "🍌", "🥝", "🍇", "🍎", "🍏", "🍐", "🍑", "🍒", "🍓", "🥥", "🍅"],
+                    // ОЧЕНЬ БЫСТРЫЕ ИНТЕРВАЛЫ
+                    intervals: {
+                        chat: 50,      // 50ms между сообщениями
+                        names: 80,     // 80ms между сменой имен
+                        reactions: 30  // 30ms между реакциями
+                    }
+                },
+                pencil: {
+                    name: 'PENCIL🍆',
+                    theme: 'pencil',
+                    toggleEmoji: '🍆',
+                    chatMessages: [
+                        "REID BY PENCILS🍆",
+                        "PENCIL🍆PENCIL🍆PENCIL🍆PENCIL🍆PENCIL🍆PENCIL🍆",
+                        "YOU ARE FUCKING BY PENCIL🍆🍆🍆",
+                        "PENCIL RAID IN PROGRESS! 🍆🍆🍆",
+                        "PENCIL ARMY ATTACK! 🍆🍆🍆",
+                        "PENCIL POWER! 🍆🍆🍆",
+                        "PENCIL DESTROYER! 🍆🍆🍆",
+                        "PENCIL SPAM! 🍆🍆🍆"
+                    ],
+                    nameVariants: ["PENCIL🍆", "PENCIL LOVER🍆", "PENCIL KING🍆", "PENCIL RAID🍆", "PENCIL SPAM🍆", "PENCIL BOSS🍆", "PENCIL GOD🍆", "PENCIL MASTER🍆"],
+                    reactions: ["🍆", "✏️", "📏", "🖊️", "✒️", "📐", "📝", "🖍️", "🖌️", "🖋️", "💼", "📎", "📌", "✂️", "📍"],
+                    // ОЧЕНЬ БЫСТРЫЕ ИНТЕРВАЛЫ
+                    intervals: {
+                        chat: 50,      // 50ms между сообщениями
+                        names: 80,     // 80ms между сменой имен
+                        reactions: 30  // 30ms между реакциями
+                    }
+                }
+            },
+            
+            init() {
+                this.loadConfig();
+            },
+            
+            activateConfig(configName) {
+                try {
+                    // Деактивируем текущую конфигурацию если есть
+                    if (this.currentConfig) {
+                        this.deactivateConfig();
+                    }
+                    
+                    const config = this.configs[configName];
+                    if (!config) return;
+                    
+                    this.currentConfig = configName;
+                    
+                    // Применяем тему
+                    ThemeManager.applyTheme(config.theme);
+                    
+                    // Меняем emoji на кнопке toggle
+                    this.updateToggleButtonEmoji(config.toggleEmoji);
+                    
+                    // ЗАПУСКАЕМ СУПЕР БЫСТРЫЙ СПАМ
+                    this.startUltraFastSpam(config);
+                    
+                    // Также запускаем дополнительные функции для максимального спама
+                    this.startAdditionalSpamFunctions();
+                    
+                    SafeStorage.setItem('thugware-config', configName);
+                    
+                    alert(`🚀 ${config.name} АКТИВИРОВАН! УЛЬТРА БЫСТРЫЙ СПАМ ЗАПУЩЕН!`);
+                    
+                    return true;
+                } catch (e) {
+                    console.warn('Ошибка активации конфигурации:', e);
+                    return false;
+                }
+            },
+            
+            deactivateConfig() {
+                try {
+                    if (!this.currentConfig) return;
+                    
+                    const config = this.configs[this.currentConfig];
+                    
+                    // Останавливаем все спам процессы
+                    this.stopAllSpamProcesses();
+                    
+                    // Возвращаем стандартную тему
+                    ThemeManager.applyTheme('default');
+                    
+                    // Возвращаем стандартное emoji на кнопке toggle
+                    this.updateToggleButtonEmoji('💀');
+                    
+                    this.currentConfig = null;
+                    SafeStorage.removeItem('thugware-config');
+                    
+                    return true;
+                } catch (e) {
+                    console.warn('Ошибка деактивации конфигурации:', e);
+                    return false;
+                }
+            },
+            
+            updateToggleButtonEmoji(emoji) {
+                const toggleButton = document.querySelector('.Thugware-toggle');
+                if (toggleButton) {
+                    toggleButton.textContent = emoji;
+                }
+            },
+            
+            startUltraFastSpam(config) {
+                // Останавливаем предыдущие процессы если есть
+                this.stopAllSpamProcesses();
+                
+                // ЗАПУСКАЕМ ОЧЕНЬ БЫСТРЫЙ СПАМ В ЧАТ
+                this.startUltraFastChatSpam(config.chatMessages, config.intervals.chat);
+                
+                // ЗАПУСКАЕМ ОЧЕНЬ БЫСТРЫЙ СПАМ ИМЕНАМИ
+                this.startUltraFastNameSpam(config.nameVariants, config.intervals.names);
+                
+                // ЗАПУСКАЕМ ОЧЕНЬ БЫСТРЫЙ СПАМ РЕАКЦИЯМИ
+                this.startUltraFastReactionSpam(config.reactions, config.intervals.reactions);
+            },
+            
+            startAdditionalSpamFunctions() {
+                // Дополнительные функции для максимального спама
+                if (window.Thugware) {
+                    // Включаем спам поднятием руки (очень быстро)
+                    this.startHandSpam();
+                    
+                    // Включаем спам запросами ИИ (очень быстро)
+                    this.startAISpam();
+                    
+                    // Включаем спам запросами демонстрации (очень быстро)
+                    this.startScreenshareSpam();
+                    
+                    // Включаем спам рандомными символами (очень быстро)
+                    this.startRandomSpam();
+                }
+            },
+            
+            stopAllSpamProcesses() {
+                // Останавливаем ВСЕ интервалы
+                const intervals = [
+                    'chatInterval', 'nameInterval', 'reactionInterval',
+                    'handInterval', 'aiInterval', 'screenshareInterval', 'randomInterval'
+                ];
+                
+                intervals.forEach(intervalName => {
+                    if (this[intervalName]) {
+                        clearInterval(this[intervalName]);
+                        this[intervalName] = null;
+                    }
+                });
+            },
+            
+            startUltraFastChatSpam(messages, interval) {
+                let messageIndex = 0;
+                this.chatInterval = setInterval(() => {
+                    if (window.Thugware && window.Thugware.actions) {
+                        // Отправляем сообщение от основного пользователя
+                        window.Thugware.actions.sendMessage(messages[messageIndex]);
+                        
+                        // Также спамим всеми ботами если есть
+                        window.bots && window.bots.forEach(bot => {
+                            if (bot?.loaded) {
+                                bot.actions.sendMessage(messages[messageIndex]);
+                            }
+                        });
+                        
+                        messageIndex = (messageIndex + 1) % messages.length;
+                    }
+                }, interval); // ОЧЕНЬ БЫСТРЫЙ ИНТЕРВАЛ
+            },
+            
+            startUltraFastNameSpam(nameVariants, interval) {
+                let nameIndex = 0;
+                this.nameInterval = setInterval(() => {
+                    if (window.Thugware && window.Thugware.actions) {
+                        // Меняем имя основного пользователя
+                        window.Thugware.actions.changeUsername(nameVariants[nameIndex]);
+                        
+                        // Также меняем имена всех ботов
+                        window.bots && window.bots.forEach(bot => {
+                            if (bot?.loaded) {
+                                bot.actions.changeUsername(nameVariants[nameIndex]);
+                            }
+                        });
+                        
+                        nameIndex = (nameIndex + 1) % nameVariants.length;
+                    }
+                }, interval); // ОЧЕНЬ БЫСТРЫЙ ИНТЕРВАЛ
+            },
+            
+            startUltraFastReactionSpam(reactions, interval) {
+                let reactionIndex = 0;
+                this.reactionInterval = setInterval(() => {
+                    if (window.Thugware && window.Thugware.actions) {
+                        // Отправляем реакцию от основного пользователя
+                        window.Thugware.actions.sendReaction(reactions[reactionIndex]);
+                        
+                        // Также отправляем реакции всеми ботами
+                        window.bots && window.bots.forEach(bot => {
+                            if (bot?.loaded) {
+                                bot.actions.sendReaction(reactions[reactionIndex]);
+                            }
+                        });
+                        
+                        reactionIndex = (reactionIndex + 1) % reactions.length;
+                    }
+                }, interval); // ОЧЕНЬ БЫСТРЫЙ ИНТЕРВАЛ
+            },
+            
+            startHandSpam() {
+                let handState = false;
+                this.handInterval = setInterval(() => {
+                    if (window.Thugware && window.Thugware.actions) {
+                        handState = !handState;
+                        window.Thugware.actions.toggleHand(handState);
+                        
+                        window.bots && window.bots.forEach(bot => {
+                            if (bot?.loaded) {
+                                bot.actions.toggleHand(handState);
+                            }
+                        });
+                    }
+                }, 100); // Быстрое переключение поднятия руки
+            },
+            
+            startAISpam() {
+                this.aiInterval = setInterval(() => {
+                    if (window.Thugware && window.Thugware.actions) {
+                        window.Thugware.actions.requestAI();
+                        
+                        window.bots && window.bots.forEach(bot => {
+                            if (bot?.loaded) {
+                                bot.actions.requestAI();
+                            }
+                        });
+                    }
+                }, 200); // Быстрый спам запросами ИИ
+            },
+            
+            startScreenshareSpam() {
+                this.screenshareInterval = setInterval(() => {
+                    if (window.Thugware && window.Thugware.actions) {
+                        const sharer = window.Thugware.hooks.state.attendeesList.attendeesList.find(e => e?.sharerOn);
+                        if (sharer) {
+                            window.Thugware.actions.requestScreenshare(sharer.userId);
+                            
+                            window.bots && window.bots.forEach(bot => {
+                                if (bot?.loaded) {
+                                    bot.actions.requestScreenshare(sharer.userId);
+                                }
+                            });
+                        }
+                    }
+                }, 300); // Быстрый спам запросами демонстрации
+            },
+            
+            startRandomSpam() {
+                this.randomInterval = setInterval(() => {
+                    if (window.Thugware && window.Thugware.actions) {
+                        // Спам рандомными символами в чате
+                        const randomString = this.generateRandomString(20);
+                        window.Thugware.actions.sendMessage(randomString);
+                        
+                        window.bots && window.bots.forEach(bot => {
+                            if (bot?.loaded) {
+                                bot.actions.sendMessage(randomString);
+                            }
+                        });
+                    }
+                }, 150); // Быстрый спам рандомными символами
+            },
+            
+            generateRandomString(length) {
+                const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+                let result = '';
+                for (let i = 0; i < length; i++) {
+                    result += chars.charAt(Math.floor(Math.random() * chars.length));
+                }
+                return result;
+            },
+            
+            loadConfig() {
+                try {
+                    const savedConfig = SafeStorage.getItem('thugware-config');
+                    if (savedConfig && this.configs[savedConfig]) {
+                        this.activateConfig(savedConfig);
+                    }
+                } catch (e) {
+                    console.warn('Ошибка загрузки конфигурации:', e);
+                }
+            },
+            
+            toggleConfig(configName) {
+                if (this.currentConfig === configName) {
+                    return this.deactivateConfig();
+                } else {
+                    return this.activateConfig(configName);
+                }
+            }
+        };
+
         // Инициализация систем
         try {
             Localization.init();
             ThemeManager.init();
             SizeManager.init();
             BackgroundManager.init();
+            ConfigManager.init();
         } catch (e) {
             console.warn('Ошибка инициализации систем:', e);
         }
@@ -1718,6 +2245,7 @@
             }
         };
 
+        // ФУНКЦИЯ ДЛЯ ОКНА СПАМА
         const createSpamSelectionPanel = function() {
             let selectionPanel = null;
             let currentSpamInterval = null;
@@ -1755,6 +2283,21 @@
                 const header = document.createElement("div");
                 header.className = "spam-selection-header";
                 header.textContent = "Выберите сообщения для спама";
+                
+                const closeButton = document.createElement("button");
+                closeButton.className = "close-button";
+                closeButton.textContent = "×";
+                closeButton.addEventListener("click", function() {
+                    selectionPanel.remove();
+                    selectionPanel = null;
+                    if (currentSpamInterval) {
+                        clearInterval(currentSpamInterval);
+                        currentSpamInterval = null;
+                    }
+                    selectedMessages.clear();
+                });
+                
+                header.appendChild(closeButton);
                 selectionPanel.appendChild(header);
                 
                 const messagesContainer = document.createElement("div");
@@ -1775,7 +2318,7 @@
                     
                     const messageText = document.createElement("div");
                     messageText.className = "spam-message-text";
-                    messageText.textContent = `${message.name}: ${message.text.substring(0, 50)}...`;
+                    messageText.textContent = `${message.name}: ${message.text.substring(0, 80)}...`;
                     messageText.title = message.text;
                     
                     checkbox.addEventListener("change", function() {
@@ -1801,7 +2344,7 @@
                 const speedInput = document.createElement("input");
                 speedInput.className = "spam-control-input";
                 speedInput.type = "number";
-                speedInput.value = "1000";
+                speedInput.value = "100";
                 speedInput.placeholder = "Скорость спама (мс)";
                 controls.appendChild(speedInput);
                 
@@ -1812,7 +2355,7 @@
                 controls.appendChild(targetInput);
                 
                 const startButton = document.createElement("button");
-                startButton.className = "spam-action-button primary";
+                startButton.className = "spam-action-button";
                 startButton.textContent = "🚀 Начать спам";
                 
                 startButton.addEventListener("click", function() {
@@ -1820,13 +2363,14 @@
                         clearInterval(currentSpamInterval);
                         currentSpamInterval = null;
                         startButton.textContent = "🚀 Начать спам";
+                        startButton.classList.remove("stop");
                     } else {
                         if (selectedMessages.size === 0) {
                             alert("Выберите хотя бы одно сообщение!");
                             return;
                         }
                         
-                        const speed = parseInt(speedInput.value) || 1000;
+                        const speed = parseInt(speedInput.value) || 100;
                         const target = targetInput.value.trim();
                         
                         const attendees = t.hooks.state.attendeesList.attendeesList;
@@ -1854,6 +2398,7 @@
                         }, speed);
                         
                         startButton.textContent = "⏹️ Остановить спам";
+                        startButton.classList.add("stop");
                     }
                 });
                 
@@ -2090,6 +2635,45 @@
                 const configContent = document.createElement("div");
                 configContent.className = "config-content";
                 
+                // Конфигурации
+                const configSection = document.createElement("div");
+                configSection.className = "config-section";
+                
+                const configTitle = document.createElement("div");
+                configTitle.className = "selector-title";
+                configTitle.textContent = "УЛЬТРА БЫСТРЫЕ КОНФИГУРАЦИИ";
+                configSection.appendChild(configTitle);
+                
+                const configButtons = document.createElement("div");
+                configButtons.className = "config-buttons";
+                
+                // Кнопка MANGO
+                const mangoBtn = document.createElement("button");
+                mangoBtn.className = `config-btn mango ${ConfigManager.currentConfig === 'mango' ? 'active' : ''}`;
+                mangoBtn.textContent = Localization.t('mangoConfig');
+                mangoBtn.addEventListener('click', () => {
+                    const success = ConfigManager.toggleConfig('mango');
+                    if (success) {
+                        this.updateConfigButtons();
+                    }
+                });
+                configButtons.appendChild(mangoBtn);
+                
+                // Кнопка PENCIL
+                const pencilBtn = document.createElement("button");
+                pencilBtn.className = `config-btn pencil ${ConfigManager.currentConfig === 'pencil' ? 'active' : ''}`;
+                pencilBtn.textContent = Localization.t('pencilConfig');
+                pencilBtn.addEventListener('click', () => {
+                    const success = ConfigManager.toggleConfig('pencil');
+                    if (success) {
+                        this.updateConfigButtons();
+                    }
+                });
+                configButtons.appendChild(pencilBtn);
+                
+                configSection.appendChild(configButtons);
+                configContent.appendChild(configSection);
+                
                 // Настройки размера
                 const sizeSection = document.createElement("div");
                 sizeSection.className = "config-section";
@@ -2163,6 +2747,7 @@
                 sliderContainer.appendChild(sliderValue);
                 opacitySection.appendChild(sliderContainer);
                 
+                configContent.appendChild(configSection);
                 configContent.appendChild(sizeSection);
                 configContent.appendChild(opacitySection);
                 
@@ -2258,6 +2843,18 @@
                 infoContent.appendChild(warning);
                 
                 this.infoTab.appendChild(infoContent);
+            }
+            
+            updateConfigButtons() {
+                const mangoBtn = this.cfgTab.querySelector('.config-btn.mango');
+                const pencilBtn = this.cfgTab.querySelector('.config-btn.pencil');
+                
+                if (mangoBtn) {
+                    mangoBtn.classList.toggle('active', ConfigManager.currentConfig === 'mango');
+                }
+                if (pencilBtn) {
+                    pencilBtn.classList.toggle('active', ConfigManager.currentConfig === 'pencil');
+                }
             }
             
             updateLanguageButtons() {
